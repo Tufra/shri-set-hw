@@ -25,12 +25,22 @@ class MySet {
         return this.value[Symbol.iterator]()
     }
 
-    keys() {
-        return this.value[Symbol.iterator]()
+    keys = function* () {
+        for (let i = 0; i < this.size; i++) {
+            yield this.value[i]
+        }
     }
 
-    values() {
-        return this.value[Symbol.iterator]()
+    values = function* () {
+        for (let i = 0; i < this.size; i++) {
+            yield this.value[i]
+        }
+    }
+
+    entries = function* () {
+        for (let i = 0; i < this.size; i++) {
+            yield [this.value[i], this.value[i]]
+        }
     }
 
     add(elem) {
@@ -39,6 +49,7 @@ class MySet {
             this.value.sort((a, b) => a - b)
             this.size++
         }
+        console.log(this)
         return this
     }
 
@@ -53,10 +64,6 @@ class MySet {
 
     has(elem) {
         return this.value.includes(elem)
-    }
-
-    entries() {
-        return this.value.map((elem) => [elem, elem])
     }
 
     clear() {
@@ -77,7 +84,6 @@ class MySet {
         this.value.forEach(cb, data)
     }
 
-
 }
 
 // тесты
@@ -93,7 +99,11 @@ console.log(set.size); // 6
 for (const item of set) {
     console.log(item); // 4 8 15 16 23 42
 }
-
+for (const item of set.keys()) {
+    console.log(item); // [ 4, 4 ] [ 8, 8 ] ...
+}for (const item of set.values()) {
+    console.log(item); // [ 4, 4 ] [ 8, 8 ] ...
+}
 // есть методы keys, values, entries
 for (const item of set.entries()) {
     console.log(item); // [ 4, 4 ] [ 8, 8 ] ...

@@ -25,12 +25,22 @@ module.exports = class {
         return this.value[Symbol.iterator]()
     }
 
-    keys() {
-        return this.value[Symbol.iterator]()
+    keys = function* () {
+        for (let i = 0; i < this.size; i++) {
+            yield this.value[i]
+        }
     }
 
-    values() {
-        return this.value[Symbol.iterator]()
+    values = function* () {
+        for (let i = 0; i < this.size; i++) {
+            yield this.value[i]
+        }
+    }
+
+    entries = function* () {
+        for (let i = 0; i < this.size; i++) {
+            yield [this.value[i], this.value[i]]
+        }
     }
 
     add(elem) {
@@ -39,6 +49,7 @@ module.exports = class {
             this.value.sort((a, b) => a - b)
             this.size++
         }
+        //console.log(this)
         return this
     }
 
@@ -53,10 +64,6 @@ module.exports = class {
 
     has(elem) {
         return this.value.includes(elem)
-    }
-
-    entries() {
-        return this.value.map((elem) => [elem, elem])
     }
 
     clear() {
@@ -76,6 +83,5 @@ module.exports = class {
     forEach(cb, data) {
         this.value.forEach(cb, data)
     }
-
 
 }
