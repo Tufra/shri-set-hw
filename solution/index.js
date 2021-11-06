@@ -25,19 +25,19 @@ module.exports = class {
         return this.value[Symbol.iterator]()
     }
 
-    keys = function* () {
+    *keys() {
         for (let i = 0; i < this.size; i++) {
             yield this.value[i]
         }
     }
 
-    values = function* () {
+    *values() {
         for (let i = 0; i < this.size; i++) {
             yield this.value[i]
         }
     }
 
-    entries = function* () {
+    *entries() {
         for (let i = 0; i < this.size; i++) {
             yield [this.value[i], this.value[i]]
         }
@@ -49,7 +49,7 @@ module.exports = class {
             this.value.sort((a, b) => a - b)
             this.size++
         }
-        //console.log(this)
+        // console.log(this)
         return this
     }
 
