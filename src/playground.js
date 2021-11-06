@@ -26,17 +26,18 @@ class MySet {
     }
 
     keys() {
-        return this.value
+        return this.value[Symbol.iterator]()
     }
 
     values() {
-        return this.value
+        return this.value[Symbol.iterator]()
     }
 
     add(elem) {
         if (!this.value.includes(elem)) {
             this.value.push(elem)
             this.value.sort((a, b) => a - b)
+            this.size++
         }
         return this
     }
@@ -45,6 +46,7 @@ class MySet {
         let index = this.value.findIndex((setElem) => setElem === elem)
         if (index !== -1) {
             this.value.splice(index, 1)
+            this.size--
         }
         return this
     }
@@ -115,10 +117,11 @@ set.add(data);
 
 // который может работать в цепочке вызовов
 set.add(object).add(object).add(object);
+console.log(set)
 
 // есть метод delete
 set.delete(data);
-
+console.log(set)
 // есть метод has
 console.log(set.has({})); // false
 console.log(set.has(object)); // true
