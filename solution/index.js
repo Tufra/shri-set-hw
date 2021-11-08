@@ -26,23 +26,18 @@ module.exports = class {
     }
 
     *keys() {
-        for (let i = 0; i < this.value.length; i++) {
-            yield this.value[i]
-        }
-        // return this.value[this.value.length - 1]
+        yield* this.value.values()
 
     }
 
     *values() {
-        for (let i = 0; i < this.value.length; i++) {
-            yield this.value[i]
-        }
+        yield* this.value.values()
         // return this.value[this.value.length - 1]
     }
 
     *entries() {
-        for (let i = 0; i < this.value.length; i++) {
-            yield [this.value[i], this.value[i]]
+        for(let item of this.value.values()) {
+            yield [item, item]
         }
         // return [this.value[this.value.length - 1], this.value[this.value.length - 1]]
     }
