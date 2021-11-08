@@ -25,80 +25,26 @@ class MySet {
         return this.value[Symbol.iterator]()
     }
 
-    keys() {
-        return {
-            index: 0,
-            arr: this.value,
-            [Symbol.iterator]() {
-                return {
-                    index: 0,
-                    arr: this.arr,
-                    next() {
-                        if (this.arr.length > 0 && this.index < this.arr.length) {
-                            return {
-                                done: false,
-                                value: (this.arr)[this.index++]
-                            }
-                        } else {
-                            return { done: true }
-                        }
-                    }
-                }
-
-            }
-
+    *keys() {
+        for (let i = 0; i < this.value.length - 1; i++) {
+            yield this.value[i]
         }
+        return this.value[this.value.length - 1]
 
     }
 
-    values() {
-        return {
-            index: 0,
-            arr: this.value,
-            [Symbol.iterator]() {
-                return {
-                    index: 0,
-                    arr: this.arr,
-                    next() {
-                        if (this.arr.length > 0 && this.index < this.arr.length) {
-                            return {
-                                done: false,
-                                value: (this.arr)[this.index++]
-                            }
-                        } else {
-                            return { done: true }
-                        }
-                    }
-                }
-
-            }
-
+    *values() {
+        for (let i = 0; i < this.value.length - 1; i++) {
+            yield this.value[i]
         }
+        return this.value[this.value.length - 1]
     }
 
-    entries() {
-        return {
-            index: 0,
-            arr: this.value,
-            [Symbol.iterator]() {
-                return {
-                    index: 0,
-                    arr: this.arr,
-                    next() {
-                        if (this.arr.length > 0 && this.index < this.arr.length) {
-                            return {
-                                done: false,
-                                value: [(this.arr)[this.index],(this.arr)[this.index++]]
-                            }
-                        } else {
-                            return { done: true }
-                        }
-                    }
-                }
-
-            }
-
+    *entries() {
+        for (let i = 0; i < this.value.length - 1; i++) {
+            yield [this.value[i], this.value[i]]
         }
+        return [this.value[this.value.length - 1], this.value[this.value.length - 1]]
     }
 
     add(elem) {
@@ -107,7 +53,6 @@ class MySet {
             this.value.sort((a, b) => a - b)
             this.size++
         }
-        // console.log(this)
         return this
     }
 
@@ -189,11 +134,11 @@ set.add(data);
 
 // который может работать в цепочке вызовов
 set.add(object).add(object).add(object);
-console.log(set)
+// console.log(set)
 
 // есть метод delete
 set.delete(data);
-console.log(set)
+// console.log(set)
 // есть метод has
 console.log(set.has({})); // false
 console.log(set.has(object)); // true
