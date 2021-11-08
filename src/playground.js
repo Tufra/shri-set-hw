@@ -25,21 +25,79 @@ class MySet {
         return this.value[Symbol.iterator]()
     }
 
-    *keys() {
-        for (let i = 0; i < this.size; i++) {
-            yield this.value[i]
+    keys() {
+        return {
+            index: 0,
+            arr: this.value,
+            [Symbol.iterator]() {
+                return {
+                    index: 0,
+                    arr: this.arr,
+                    next() {
+                        if (this.arr.length > 0 && this.index < this.arr.length) {
+                            return {
+                                done: false,
+                                value: (this.arr)[this.index++]
+                            }
+                        } else {
+                            return { done: true }
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    values() {
+        return {
+            index: 0,
+            arr: this.value,
+            [Symbol.iterator]() {
+                return {
+                    index: 0,
+                    arr: this.arr,
+                    next() {
+                        if (this.arr.length > 0 && this.index < this.arr.length) {
+                            return {
+                                done: false,
+                                value: (this.arr)[this.index++]
+                            }
+                        } else {
+                            return { done: true }
+                        }
+                    }
+                }
+
+            }
+
         }
     }
 
-    *values() {
-        for (let i = 0; i < this.size; i++) {
-            yield this.value[i]
-        }
-    }
+    entries() {
+        return {
+            index: 0,
+            arr: this.value,
+            [Symbol.iterator]() {
+                return {
+                    index: 0,
+                    arr: this.arr,
+                    next() {
+                        if (this.arr.length > 0 && this.index < this.arr.length) {
+                            return {
+                                done: false,
+                                value: [(this.arr)[this.index],(this.arr)[this.index++]]
+                            }
+                        } else {
+                            return { done: true }
+                        }
+                    }
+                }
 
-    *entries() {
-        for (let i = 0; i < this.size; i++) {
-            yield [this.value[i], this.value[i]]
+            }
+
         }
     }
 
@@ -99,12 +157,16 @@ console.log(set.size); // 6
 for (const item of set) {
     console.log(item); // 4 8 15 16 23 42
 }
+console.log('keys')
 for (const item of set.keys()) {
     console.log(item); // [ 4, 4 ] [ 8, 8 ] ...
-}for (const item of set.values()) {
+}
+console.log('values')
+for (const item of set.values()) {
     console.log(item); // [ 4, 4 ] [ 8, 8 ] ...
 }
 // есть методы keys, values, entries
+console.log('entries')
 for (const item of set.entries()) {
     console.log(item); // [ 4, 4 ] [ 8, 8 ] ...
 }

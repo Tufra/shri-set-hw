@@ -25,21 +25,79 @@ module.exports = class {
         return this.value[Symbol.iterator]()
     }
 
-    *keys() {
-        for (let i = 0; i < this.size; i++) {
-            yield this.value[i]
+    keys() {
+        return {
+            index: 0,
+            arr: this.value,
+            [Symbol.iterator]() {
+                return {
+                    index: 0,
+                    arr: this.arr,
+                    next() {
+                        if (this.arr.length > 0 && this.index < this.arr.length) {
+                            return {
+                                done: false,
+                                value: (this.arr)[this.index++]
+                            }
+                        } else {
+                            return { done: true }
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    values() {
+        return {
+            index: 0,
+            arr: this.value,
+            [Symbol.iterator]() {
+                return {
+                    index: 0,
+                    arr: this.arr,
+                    next() {
+                        if (this.arr.length > 0 && this.index < this.arr.length) {
+                            return {
+                                done: false,
+                                value: (this.arr)[this.index++]
+                            }
+                        } else {
+                            return { done: true }
+                        }
+                    }
+                }
+
+            }
+
         }
     }
 
-    *values() {
-        for (let i = 0; i < this.size; i++) {
-            yield this.value[i]
-        }
-    }
+    entries() {
+        return {
+            index: 0,
+            arr: this.value,
+            [Symbol.iterator]() {
+                return {
+                    index: 0,
+                    arr: this.arr,
+                    next() {
+                        if (this.arr.length > 0 && this.index < this.arr.length) {
+                            return {
+                                done: false,
+                                value: [(this.arr)[this.index],(this.arr)[this.index++]]
+                            }
+                        } else {
+                            return { done: true }
+                        }
+                    }
+                }
 
-    *entries() {
-        for (let i = 0; i < this.size; i++) {
-            yield [this.value[i], this.value[i]]
+            }
+
         }
     }
 
