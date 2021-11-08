@@ -26,25 +26,25 @@ class MySet {
     }
 
     *keys() {
-        for (let i = 0; i < this.value.length - 1; i++) {
+        for (let i = 0; i < this.value.length; i++) {
             yield this.value[i]
         }
-        return this.value[this.value.length - 1]
+        // return this.value[this.value.length - 1]
 
     }
 
     *values() {
-        for (let i = 0; i < this.value.length - 1; i++) {
+        for (let i = 0; i < this.value.length; i++) {
             yield this.value[i]
         }
-        return this.value[this.value.length - 1]
+        // return this.value[this.value.length - 1]
     }
 
     *entries() {
-        for (let i = 0; i < this.value.length - 1; i++) {
+        for (let i = 0; i < this.value.length; i++) {
             yield [this.value[i], this.value[i]]
         }
-        return [this.value[this.value.length - 1], this.value[this.value.length - 1]]
+        // return [this.value[this.value.length - 1], this.value[this.value.length - 1]]
     }
 
     add(elem) {
